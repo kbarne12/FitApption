@@ -9,6 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def about(request):
   return render(request, 'about.html')
 
+def workouts_index(request):
+  return render(request, 'workouts/index.html', { 'workouts': workouts })
+
 
 
 

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Cat Collector</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
   <header class="navbar-fixed">
@@ -20,8 +22,8 @@
   {% if user.is_authenticated %}
     {% comment %} <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
     <li><a href="{% url 'toys_index' %}">View All Toys</a></li>
-    <li><a href="{% url 'cats_create' %}">Add a Cat</a></li>
-    <li><a href="{% url 'index' %}">View All My Cats</a></li> {% endcomment %}
+    <li><a href="{% url 'cats_create' %}">Add a Cat</a></li> {% endcomment %}
+    <li><a href="{% url 'index' %}">View All My Workouts</a></li>
     <li><a href="{% url 'logout' %}">Log Out</a></li>
   {% else %}
     <li><a href="{% url 'signup' %}">Sign Up</a></li>
