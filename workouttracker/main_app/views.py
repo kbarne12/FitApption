@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Workout
@@ -17,6 +18,16 @@ def workouts_index(request):
 
 def workouts_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
+  return render(request, 'workouts/detail.html', {'workouts': workout})
+
+class WorkoutCreate(CreateView):
+  model = Workout
+  fields = '__all__'
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+
 
 
 

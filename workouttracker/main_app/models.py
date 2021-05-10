@@ -17,8 +17,13 @@ class Workout(models.Model):
   date = models.DateField()
   day = models.IntegerField()
   duration = models.IntegerField()
-  training = models.CharField(
-    max_length=1,
-    choices=TRAININGS,
-    default=TRAININGS[0][0])
   calories = models.IntegerField()
+  weight = models.IntegerField()
+  # training_type = models.CharField(
+  #   max_length=1,
+  #   choices=TRAININGS)
+  def get_absolute_url(self):
+    return reverse("detail", kwargs={"workout_id": self.id})
+
+
+  
