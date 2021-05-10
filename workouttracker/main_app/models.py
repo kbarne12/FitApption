@@ -22,6 +22,8 @@ class Workout(models.Model):
   # training_type = models.CharField(
   #   max_length=1,
   #   choices=TRAININGS)
+  def __str__(self):
+      return self.name
   def get_absolute_url(self):
     return reverse("detail", kwargs={"workout_id": self.id})
 

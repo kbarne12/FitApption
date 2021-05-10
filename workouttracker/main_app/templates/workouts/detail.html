@@ -15,10 +15,10 @@
     
         <p>Calories Burned: {{ workout.calories }}</p>
       </div>
-      {% comment %} <div class="card-action">
-        <a href="{% url 'cats_update' cat.id %}">Edit</a>
-        <a href="{% url 'cats_delete' cat.id %}">Delete</a>
-      </div> {% endcomment %}
+      <div class="card-action">
+        <a href="{% url 'workouts_update' workout.id %}">Edit</a>
+        <a href="{% url 'workouts_delete' workout.id %}">Delete</a>
+      </div>
     </div>
     {% comment %} {% for photo in cat.photo_set.all %}
       <img class="responsive-img card-panel" src="{{photo.url}}">
