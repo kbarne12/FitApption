@@ -8,8 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Define the home view
 def about(request):
   return render(request, 'about.html')
-
+@login_required
 def workouts_index(request):
+  workouts = Workout.objects.filter(user=request.user)
   return render(request, 'workouts/index.html', { 'workouts': workouts })
 
 

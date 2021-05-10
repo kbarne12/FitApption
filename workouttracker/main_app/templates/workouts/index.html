@@ -6,14 +6,9 @@
 {% for workout in workouts %}
   <div class="card">
     <div class="card-content">
-      <span class="card-title">{{ workout.name }}</span>
-      <p>Breed: {{ workout.breed }}</p>
-      <p>Description: {{ workout.description }}</p>
-      {% if workout.age > 0 %}
-        <p>Age: {{ workout.age }}</p>
-      {% else %}
-        <p>Age: </p>
-      {% endif %}
+      <span class="card-title">Day Number: {{ workout.day }}</span>
+      <p>Date: {{ workout.date }}</p>
+      <p>Duration: {{ workout.duration }}Minutes</p> 
     </div>
   </div>
 {% endfor %}
