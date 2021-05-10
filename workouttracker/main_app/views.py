@@ -10,9 +10,13 @@ from .models import Workout
 def about(request):
   return render(request, 'about.html')
 @login_required
+
 def workouts_index(request):
   workouts = Workout.objects.filter()
   return render(request, 'workouts/index.html', { 'workouts': workouts })
+
+def workouts_detail(request, workout_id):
+  workout = Workout.objects.get(id=workout_id)
 
 
 
