@@ -4,13 +4,14 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Workout
 
 # Define the home view
 def about(request):
   return render(request, 'about.html')
 @login_required
 def workouts_index(request):
-  workouts = Workout.objects.filter(user=request.user)
+  workouts = Workout.objects.filter()
   return render(request, 'workouts/index.html', { 'workouts': workouts })
 
 
