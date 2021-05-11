@@ -12,6 +12,17 @@ TRAININGS = (
 )
 
 
+class Exercise(models.Model):
+  name = models.CharField(max_length=100)
+  Reps = models.IntegerField()
+  sets = models.IntegerField()
+  
+  def __str__(self):
+    return self.name
+  
+  def get_absolute_url(self):
+    return reverse("exercises_detail", kwargs={"pk": self.id})
+
 
 class Workout(models.Model):
   date = models.DateField()
@@ -19,13 +30,12 @@ class Workout(models.Model):
   duration = models.IntegerField()
   calories = models.IntegerField()
   weight = models.IntegerField()
-  # training_type = models.CharField(
-  #   max_length=1,
-  #   choices=TRAININGS)
-  def __str__(self):
-      return self.name
+  exercises = models.ManyToManyField(Exercise)
+  
   def get_absolute_url(self):
     return reverse("detail", kwargs={"workout_id": self.id})
 
 
+
+  
   
