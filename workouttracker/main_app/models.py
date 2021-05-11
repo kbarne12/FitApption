@@ -14,7 +14,7 @@ TRAININGS = (
 
 class Exercise(models.Model):
   name = models.CharField(max_length=100)
-  Reps = models.IntegerField()
+  reps = models.IntegerField()
   sets = models.IntegerField()
   
   def __str__(self):

@@ -18,8 +18,8 @@ def workouts_index(request):
 
 def workouts_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
-  workout_exercise = Exercise.objects.exclude(id_in = workout.exercies.all().value_list('id'))
-  return render(request, 'workouts/detail.html', {'workout': workout}, {'exercises' : workout_exercise})
+ 
+  return render(request, 'workouts/detail.html', {'workout': workout})
 
 class WorkoutCreate(CreateView):
   model = Workout
