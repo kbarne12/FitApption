@@ -42,7 +42,7 @@ class Profile(models.Model):
 
 class Photo(models.Model):
   url = models.CharField(max_length=200)
-  workouts = models.ForeignKey(Workout, on_delete=models.CASCADE)
+  workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
 
   def __str__(self):
     return f"Photo for workout_id: {self.workout_id} @{self.url}"

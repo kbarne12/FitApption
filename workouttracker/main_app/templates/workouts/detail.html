@@ -20,6 +20,17 @@
         <a href="{% url 'workouts_delete' workout.id %}">Delete</a>
       </div>
     </div>
+    {% for photo in workout.photo_set.all %}
+      <img class="responsive-img card-panel" src="{{photo.url}}">
+    {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    {% endfor %}
+    <form action="{% url 'add_photo' workout.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <br><br>
+      <input type="submit" class="btn" value="Upload Photo">
+    </form>
 </div>
 <hr>
 <div class="row">
@@ -33,10 +44,11 @@
               <p>Exercise: {{ exercise.name }}</p>
               <p>Reps: {{ exercise.reps }}</p>
               <p>Sets: {{ exercise.sets }}</p>
-            </span>
+            </span> <a href="{% url 'remove_exercise' workout.id exercise.id %}">Remove Exercise</a>
           </div>
         </div>
       {% endfor %}
+      
     {% else %}
       <a href="{% url 'exercises_create' %}">Create an Exercise</a>
     {% endif %}
