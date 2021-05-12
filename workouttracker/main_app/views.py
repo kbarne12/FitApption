@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -18,8 +18,10 @@ def workouts_index(request):
 
 def workouts_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
+  exercises_workout_doesnt_have = Exercise.objects.exclude(id__in = workout.exercises.all().values_list('id'))
+  return render(request, 'workouts/detail.html', 
+  {'exercises': exercises_workout_doesnt_have, 'workout' : workout})
  
-  return render(request, 'workouts/detail.html', {'workout': workout})
 
 class WorkoutCreate(CreateView):
   model = Workout
@@ -43,6 +45,7 @@ class ExerciseList(ListView):
 
 class ExerciseDetail(LoginRequiredMixin, DetailView):
   model = Exercise
+  
 
 class ExerciseCreate(CreateView):
   model = Exercise
@@ -55,6 +58,10 @@ class ExerciseUpdate(UpdateView):
 class ExerciseDelete(DeleteView):
   model = Exercise
   success_url = '/exercises/'
+
+def assoc_exercise(request, workout_id, exercise_id):
+  Workout.objects.get(id=workout_id).exercises.add(exercise_id)
+  return redirect('detail', workout_id=workout_id)
 
 
 

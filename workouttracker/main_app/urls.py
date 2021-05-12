@@ -14,5 +14,5 @@ urlpatterns = [
   path('exercises/<int:pk>/update/', views.ExerciseUpdate.as_view(), name='exercises_update'),
   path('exercises/<int:pk>/delete/', views.ExerciseDelete.as_view(), name='exercises_delete'),
   path('exercises/', views.ExerciseList.as_view(), name='exercises_index'),
-  # path('cats/<int:cat_id>/assoc_exercise/<int:exercise_id>/', views.assoc_exercise, name='assoc_exercise'),
+  path('workouts/<int:workout_id>/assoc_exercise/<int:exercise_id>/', views.assoc_exercise, name='assoc_exercise'),
 ]

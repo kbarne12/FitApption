@@ -9,7 +9,7 @@
       <div class="card-content">
         <span class="card-title">Workout #{{ workout.day }}</span>
         <p>Date: {{ workout.date }}</p>
-        <p>Duration: {{ workout.duration }}Minutes</p> 
+        <p>Duration: {{ workout.duration }} Minutes</p> 
         <p>Weight: {{ workout.weight }} lbs</p>      
         
     
@@ -38,9 +38,33 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>No exercises :(</h5>
+      <a href="{% url 'exercises_create' %}">Create an Exercise</a>
     {% endif %}
   </div>
-  <!-- Available toys will come after this line -->
 </div>
+
+<div class="col s6">
+    <h3>Available Exercises</h3>
+    {% if exercises.count %}
+      {% for exercise in exercises.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <p>Exercise: {{ exercise.name }}</p>
+              <p>Reps: {{ exercise.reps }}</p>
+              <p>Sets: {{ exercise.sets }}</p>
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_exercise' workout.id exercise.id %}" method="post">
+                {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{workout.day}} Already Has All Exercises Available</h5>
+    {% endif %}
+  </div>
 {% endblock %}
