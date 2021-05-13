@@ -2,17 +2,20 @@
 {% block content %}
 
 <h1>Exercise List</h1>
-
+<div class="exercise_container">
 {% for exercise in exercise_list %}
   <a href="{% url 'exercises_detail' exercise.id %}">
-    <div class="card">
+  <div class="outer_container">
+    <div class="card col s4 red accent-4">
         <div class="card-content">
             <span class="card-title">{{ exercise.name }}</span>
             <p>Reps: {{ exercise.reps }}</p>
             <p>Sets: {{ exercise.sets }}</p>
         </div>
     </div>
+  </div>
+   
   </a>
 {% endfor %}
-
+</div>
 {% endblock %}

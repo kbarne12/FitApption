@@ -16,12 +16,13 @@ BUCKET = 'fitapption'
 # Define the home view
 def about(request):
   return render(request, 'about.html')
-@login_required
 
+@login_required
 def workouts_index(request):
   workouts = Workout.objects.filter()
   return render(request, 'workouts/index.html', { 'workouts': workouts })
 
+@login_required
 def workouts_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
   exercises_workout_doesnt_have = Exercise.objects.exclude(id__in = workout.exercises.all().values_list('id'))
@@ -30,23 +31,23 @@ def workouts_detail(request, workout_id):
   {'exercises': exercises_workout_doesnt_have, 'workout' : workout, 'feeding_form': feeding_form})
  
 
-class WorkoutCreate(CreateView):
+class WorkoutCreate(LoginRequiredMixin, CreateView):
   model = Workout
-  fields = '__all__'
+  fields = ['date', 'day', 'calories', 'weight', 'duration']
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class WorkoutUpdate(UpdateView):
+class WorkoutUpdate(LoginRequiredMixin, UpdateView):
   model = Workout
   fields = ['date', 'day', 'calories', 'weight', 'duration']
 
-class WorkoutDelete(DeleteView):
+class WorkoutDelete(LoginRequiredMixin, DeleteView):
   model = Workout
   success_url = '/workouts/'
 
-class ExerciseList(ListView):
+class ExerciseList(LoginRequiredMixin, ListView):
   model = Exercise
 
 
@@ -54,26 +55,29 @@ class ExerciseDetail(LoginRequiredMixin, DetailView):
   model = Exercise
   
 
-class ExerciseCreate(CreateView):
+class ExerciseCreate(LoginRequiredMixin, CreateView):
   model = Exercise
   fields = '__all__'
 
-class ExerciseUpdate(UpdateView):
+class ExerciseUpdate(LoginRequiredMixin, UpdateView):
   model = Exercise
   fields = '__all__'
 
-class ExerciseDelete(DeleteView):
+class ExerciseDelete(LoginRequiredMixin, DeleteView):
   model = Exercise
   success_url = '/exercises/'
 
+@login_required
 def assoc_exercise(request, workout_id, exercise_id):
   Workout.objects.get(id=workout_id).exercises.add(exercise_id)
   return redirect('detail', workout_id=workout_id)
 
+@login_required
 def remove_exercise(request, workout_id, exercise_id):
   Workout.objects.get(id=workout_id).exercises.remove(exercise_id)
   return redirect('detail', workout_id=workout_id)
 
+@login_required
 def add_photo(request, workout_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
@@ -88,6 +92,7 @@ def add_photo(request, workout_id):
       print('An error occurred uploading file to S3: %s' % err)
   return redirect('detail', workout_id=workout_id)
 
+@login_required
 def add_feeding(request, workout_id):
   form = FeedingForm(request.POST)
   if form.is_valid():

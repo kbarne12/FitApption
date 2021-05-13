@@ -43,7 +43,7 @@ class Workout(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    
 class Photo(models.Model):
   url = models.CharField(max_length=200)
   workout = models.ForeignKey(Workout, on_delete=models.CASCADE)

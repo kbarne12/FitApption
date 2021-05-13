@@ -6,40 +6,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fitapption</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+  </script>
+  
 </head>
 <body>
-  <header class="navbar-fixed">
-    <nav>
+  <header>
+    <nav class=" red accent-4">
       <div class="nav-wrapper">
         <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;FitApption</a></li>
         </ul>
-        <ul class="right">
+        
+        <ul class="right hide-on-med-and-down">
   <!-- changes below -->
-  <li><a href="{% url 'about' %}">About</a></li>
-  {% if user.is_authenticated %}
-    <li><a href="{% url 'exercises_create' %}">Add an Exercise</a></li>
-    <li><a href="{% url 'exercises_index' %}">View All Exercises</a></li> 
-    <li><a href="{% url 'workouts_create' %}">Add a Workout</a></li> 
-    <li><a href="{% url 'index' %}">View All My Workouts</a></li>
-    <li><a href="{% url 'logout' %}">Log Out</a></li>
-  {% else %}
-    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-    <li><a href="{% url 'login' %}">Log In</a></li>
-  {% endif %}
-</ul>
+        <li><a href="{% url 'about' %}">Home</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'exercises_create' %}">Add an Exercise</a></li>
+          <li><a href="{% url 'exercises_index' %}">View All Exercises</a></li> 
+          <li><a href="{% url 'workouts_create' %}">Add a Workout</a></li> 
+          <li><a href="{% url 'index' %}">View All My Workouts</a></li>
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+        {% else %}
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a href="{% url 'login' %}">Log In</a></li>
+        {% endif %}
+        </ul>
       </div>
     </nav>
   </header>
   <main class="container">
-    {% block content %}
+    {% block content %} 
+    
+    {% comment %} <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> {% endcomment %}
+    {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> {% endcomment %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
+  <footer class="page-footer red accent-4">
     <div class="right">All Rights Reserved, &copy; 2021 Workout Tracker &nbsp;</div>
   </footer>
+  
 </body>
+
 </html>

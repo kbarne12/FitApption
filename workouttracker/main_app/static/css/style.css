@@ -13,3 +13,26 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+  .display_workout{
+    display: flex;
+    height: 75vh;
+    width: 100%;
+    flex-wrap: wrap;
+    
+    /* flex-direction: column; */
+
+  }
+.outer_container{
+  flex-wrap:wrap;
+  /* width: 200px; */
+  /* height: 150px; */
+  margin-right: 20px !important;
+}
+
+.exercise_container{
+  display: flex;
+    height: 75vh;
+    width: 100%;
+    flex-wrap: wrap;
+}
