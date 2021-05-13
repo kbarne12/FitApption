@@ -1,16 +1,15 @@
 from django.db import models
 from django.urls import reverse
 
-
 # Import the User
 from django.contrib.auth.models import User
 # Create your models here.
 
-TRAININGS = (
-  ('H', 'HIIT'),
-  ('C', 'cardio'),
-  ('R', 'resistance')
-)
+# TRAININGS = (
+#   ('H', 'HIIT'),
+#   ('C', 'cardio'),
+#   ('R', 'resistance')
+# )
 
 MEALS = (
   ('B', 'Breakfast'),
@@ -58,5 +57,9 @@ class Feeding(models.Model):
     max_length=1,
     choices=MEALS,
     default=MEALS[0][0])
+
   workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"{self.get_meal_display()} on {self.calories}"
   

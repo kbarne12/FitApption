@@ -25,8 +25,9 @@ def workouts_index(request):
 def workouts_detail(request, workout_id):
   workout = Workout.objects.get(id=workout_id)
   exercises_workout_doesnt_have = Exercise.objects.exclude(id__in = workout.exercises.all().values_list('id'))
+  feeding_form = FeedingForm()
   return render(request, 'workouts/detail.html', 
-  {'exercises': exercises_workout_doesnt_have, 'workout' : workout})
+  {'exercises': exercises_workout_doesnt_have, 'workout' : workout, 'feeding_form': feeding_form})
  
 
 class WorkoutCreate(CreateView):

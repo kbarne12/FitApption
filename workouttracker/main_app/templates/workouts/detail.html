@@ -11,8 +11,6 @@
         <p>Date: {{ workout.date }}</p>
         <p>Duration: {{ workout.duration }} Minutes</p> 
         <p>Weight: {{ workout.weight }} lbs</p>      
-        
-    
         <p>Calories Burned: {{ workout.calories }}</p>
       </div>
       <div class="card-action">
@@ -31,9 +29,31 @@
       <br><br>
       <input type="submit" class="btn" value="Upload Photo">
     </form>
-</div>
+  </div>
+  <div class="col s6"> <span class="card-title">What did you eat today?</span>
+    <form action="{% url 'add_feeding' workout.id %}" method='post'>
+      {% csrf_token %}
+      {{ feeding_form.as_p }}
+      <input type="submit" class="btn" value="Add Meal">
+    </form>
+    <br>
+    <div class="card-panel red-text center-align">Track your Meals</div>
+      <table class="striped">
+        <thead>
+          <tr><th>Meal</th><th>Calories</th><th>Total Calories</th></tr>
+        </thead>
+        <tbody>
+          {% for feeding in workout.feeding_set.all %}
+            <tr>
+              <td>{{feeding.get_meal_display}}</td>
+              <td>{{feeding.calories}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 <hr>
-<div class="row">
   <div class="col s6">
     <h3>Day {{ workout.day }} Exercises</h3>
     {% if workout.exercises.count %}
@@ -48,14 +68,14 @@
           </div>
         </div>
       {% endfor %}
-      
+
     {% else %}
       <a href="{% url 'exercises_create' %}">Create an Exercise</a>
     {% endif %}
   </div>
-</div>
 
-<div class="col s6">
+
+  <div class="col s6">
     <h3>Available Exercises</h3>
     {% if exercises.count %}
       {% for exercise in exercises.all %}
@@ -79,4 +99,19 @@
       <h5>{{workout.day}} Already Has All Exercises Available</h5>
     {% endif %}
   </div>
+</div>
+
+<script>
+  var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  var selectEl = document.getElementById('id_meal');
+  M.FormSelect.init(selectEl);
+</script>
+
+
 {% endblock %}
