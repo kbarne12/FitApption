@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import FeedingForm
 import uuid
 import boto3
 from .models import Workout, Exercise, Photo
@@ -84,6 +85,14 @@ def add_photo(request, workout_id):
       photo.save()
     except Exception as err:
       print('An error occurred uploading file to S3: %s' % err)
+  return redirect('detail', workout_id=workout_id)
+
+def add_feeding(request, workout_id):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.workout_id = workout_id
+    new_feeding.save()
   return redirect('detail', workout_id=workout_id)
 
 

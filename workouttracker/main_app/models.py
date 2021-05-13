@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+
+
 # Import the User
 from django.contrib.auth.models import User
 # Create your models here.
@@ -11,7 +12,11 @@ TRAININGS = (
   ('R', 'resistance')
 )
 
-
+MEALS = (
+  ('B', 'Breakfast'),
+  ('L', 'Lunch'),
+  ('D', 'Dinner')
+)
 
 class Exercise(models.Model):
   name = models.CharField(max_length=100)
@@ -47,5 +52,11 @@ class Photo(models.Model):
   def __str__(self):
     return f"Photo for workout_id: {self.workout_id} @{self.url}"
 
-  
+class Feeding(models.Model):
+  calories = models.IntegerField('Calories')
+  meal = models.CharField(
+    max_length=1,
+    choices=MEALS,
+    default=MEALS[0][0])
+  workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
   
