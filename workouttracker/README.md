@@ -10,7 +10,7 @@
 ### Getting Started:
 The app can be launched [here](https://fitapption.herokuapp.com/) and was deployed using Heroku.
 
-I used Trello to oranize this project throughout development. The Trello board can be found [here](https://trello.com/b/sq9Ba1mL/unit-4-wireframe).
+I used Trello to organize this project throughout development. The Trello board can be found [here](https://trello.com/b/sq9Ba1mL/unit-4-wireframe).
 
 ### Screenshots:
 #### Landing Page:
@@ -46,6 +46,7 @@ I used Trello to oranize this project throughout development. The Trello board c
 ### Credit
 * Gif from [giphy](https://www.giphy.com)
 * Google Images
+* SEI Instructors
 
 ### Next Steps (Icebox Features):
 * Add Profile Page
