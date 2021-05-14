@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Exercise List</h1>
-<div class="exercise_container">
+<h1 class="center-align">Exercise List</h1>
+<div class="exercise_container center-align">
 {% for exercise in exercise_list %}
   <a href="{% url 'exercises_detail' exercise.id %}">
   <div class="outer_container">
     <div class="card col s4 red accent-4">
-        <div class="card-content">
+        <div class="card-content white-text">
             <span class="card-title">{{ exercise.name }}</span>
             <p>Reps: {{ exercise.reps }}</p>
             <p>Sets: {{ exercise.sets }}</p>

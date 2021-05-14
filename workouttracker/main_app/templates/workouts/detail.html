@@ -54,25 +54,25 @@
     </div>
   </div>
 <hr>
-  <div class="col s6">
-    <h3>Day {{ workout.day }} Exercises</h3>
-    {% if workout.exercises.count %}
-      {% for exercise in workout.exercises.all %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">
-              <p>Exercise: {{ exercise.name }}</p>
-              <p>Reps: {{ exercise.reps }}</p>
-              <p>Sets: {{ exercise.sets }}</p>
-            </span> <a href="{% url 'remove_exercise' workout.id exercise.id %}">Remove Exercise</a>
+    <div class="col s6">
+      <h3>Day {{ workout.day }} Exercises</h3>
+      {% if workout.exercises.count %}
+        {% for exercise in workout.exercises.all %}
+          <div class="card col s4 red accent-4">
+            <div class="card-content">
+              <span class="card-title">
+                <p>Exercise: {{ exercise.name }}</p>
+                <p>Reps: {{ exercise.reps }}</p>
+                <p>Sets: {{ exercise.sets }}</p>
+              </span><a href="{% url 'remove_exercise' workout.id exercise.id %}">Remove Exercise</a>
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
 
-    {% else %}
-      <a href="{% url 'exercises_create' %}">Create an Exercise</a>
-    {% endif %}
-  </div>
+      {% else %}
+        <a href="{% url 'exercises_create' %}">Create an Exercise</a>
+      {% endif %}
+    </div>
 
 
   <div class="col s6">
